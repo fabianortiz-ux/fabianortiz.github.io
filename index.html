@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Valentina Torres — UX Designer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black: #0e0e0d;
+    --white: #fafaf8;
+    --gray-100: #f4f4f1;
+    --gray-200: #e8e8e3;
+    --gray-400: #b0b0a8;
+    --gray-600: #6b6b63;
+    --gray-800: #2d2d2a;
+    --accent: #1a1a18;
+    --link: #2563eb;
+    --serif: 'DM Serif Display', Georgia, serif;
+    --sans: 'DM Sans', system-ui, sans-serif;
+    --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--white);
+    color: var(--black);
+    line-height: 1.7;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 4rem;
+    background: rgba(250,250,248,0.88);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--gray-200);
+  }
+
+  .nav-logo {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    letter-spacing: -0.01em;
+    text-decoration: none;
+    color: var(--black);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 0.875rem;
+    font-weight: 400;
+    color: var(--gray-600);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--black); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 8rem 4rem 6rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .hero-label {
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gray-400);
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .hero-label::before {
+    content: '';
+    display: block;
+    width: 2rem;
+    height: 1px;
+    background: var(--gray-400);
+  }
+
+  h1 {
+    font-family: var(--serif);
+    font-size: clamp(3rem, 7vw, 6.5rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    font-weight: 400;
+    max-width: 14ch;
+    margin-bottom: 2rem;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--gray-600);
+  }
+
+  .hero-desc {
+    font-size: 1.125rem;
+    color: var(--gray-600);
+    max-width: 48ch;
+    line-height: 1.8;
+    font-weight: 300;
+    margin-bottom: 3rem;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.85rem 1.75rem;
+    background: var(--black);
+    color: var(--white);
+    font-family: var(--sans);
+    font-size: 0.875rem;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    border-radius: 100px;
+    transition: background 0.2s, transform 0.2s var(--ease);
+  }
+
+  .btn-primary:hover { background: var(--gray-800); transform: translateY(-1px); }
+
+  .btn-secondary {
+    font-size: 0.875rem;
+    color: var(--gray-600);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    border-bottom: 1px solid var(--gray-200);
+    padding-bottom: 1px;
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  .btn-secondary:hover { color: var(--black); border-color: var(--black); }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 3rem;
+    left: 4rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gray-400);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+  }
+
+  /* SECTION SHARED */
+  section {
+    padding: 6rem 4rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gray-400);
+    margin-bottom: 3.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--gray-200);
+  }
+
+  h2 {
+    font-family: var(--serif);
+    font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+  }
+
+  /* ABOUT */
+  #about {
+    border-top: 1px solid var(--gray-200);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: start;
+  }
+
+  .about-left h2 { margin-bottom: 1.5rem; }
+
+  .about-text {
+    font-size: 1.05rem;
+    color: var(--gray-600);
+    line-height: 1.85;
+    font-weight: 300;
+  }
+
+  .about-text p + p { margin-top: 1.25rem; }
+
+  .about-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .stat {
+    border-top: 1px solid var(--gray-200);
+    padding-top: 1rem;
+  }
+
+  .stat-number {
+    font-family: var(--serif);
+    font-size: 2.25rem;
+    line-height: 1;
+    margin-bottom: 0.35rem;
+  }
+
+  .stat-label {
+    font-size: 0.8rem;
+    color: var(--gray-600);
+    letter-spacing: 0.03em;
+  }
+
+  .about-photo {
+    aspect-ratio: 3/4;
+    background: var(--gray-100);
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .photo-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 0.5rem;
+    color: var(--gray-400);
+    font-size: 0.8rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .photo-icon {
+    width: 48px;
+    height: 48px;
+    border: 1.5px solid var(--gray-200);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+  }
+
+  /* SKILLS */
+  #skills {
+    border-top: 1px solid var(--gray-200);
+  }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin-top: 1rem;
+    background: var(--gray-200);
+    border: 1px solid var(--gray-200);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .skill-card {
+    background: var(--white);
+    padding: 2rem 1.75rem;
+    transition: background 0.2s;
+  }
+
+  .skill-card:hover { background: var(--gray-100); }
+
+  .skill-category {
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gray-400);
+    margin-bottom: 1rem;
+  }
+
+  .skill-card h3 {
+    font-family: var(--serif);
+    font-size: 1.2rem;
+    font-weight: 400;
+    margin-bottom: 1.25rem;
+    line-height: 1.3;
+  }
+
+  .skill-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .skill-list li {
+    font-size: 0.875rem;
+    color: var(--gray-600);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .skill-list li::before {
+    content: '';
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--gray-200);
+    flex-shrink: 0;
+  }
+
+  .tools-row {
+    margin-top: 3rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .tool-tag {
+    padding: 0.4rem 1rem;
+    border: 1px solid var(--gray-200);
+    border-radius: 100px;
+    font-size: 0.8rem;
+    color: var(--gray-600);
+    letter-spacing: 0.02em;
+    transition: border-color 0.2s, color 0.2s;
+  }
+
+  .tool-tag:hover { border-color: var(--gray-400); color: var(--black); }
+
+  /* CASE STUDIES */
+  #work {
+    border-top: 1px solid var(--gray-200);
+  }
+
+  .work-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 3.5rem;
+  }
+
+  .work-header h2 { margin-bottom: 0; }
+
+  .cases-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .case-card {
+    background: var(--gray-100);
+    border-radius: 8px;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 340px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .case-card:hover { background: var(--gray-200); }
+
+  .case-card.featured {
+    grid-template-columns: 1fr;
+    min-height: 480px;
+  }
+
+  .case-content {
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .case-top { display: flex; flex-direction: column; gap: 1rem; }
+
+  .case-meta {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+  }
+
+  .case-tag {
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gray-600);
+    padding: 0.3rem 0.75rem;
+    border: 1px solid var(--gray-200);
+    border-radius: 100px;
+    background: var(--white);
+  }
+
+  .case-year {
+    font-size: 0.75rem;
+    color: var(--gray-400);
+  }
+
+  .case-title {
+    font-family: var(--serif);
+    font-size: 1.75rem;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.25;
+  }
+
+  .case-card.featured .case-title { font-size: 2.5rem; }
+
+  .case-desc {
+    font-size: 0.9rem;
+    color: var(--gray-600);
+    line-height: 1.7;
+    max-width: 48ch;
+  }
+
+  .case-bottom {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .case-metrics {
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  .metric {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .metric-value {
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    line-height: 1;
+  }
+
+  .metric-label {
+    font-size: 0.7rem;
+    color: var(--gray-400);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-top: 0.2rem;
+  }
+
+  .case-link {
+    margin-left: auto;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid var(--gray-200);
+    background: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: var(--black);
+    font-size: 1rem;
+    transition: background 0.2s, transform 0.2s var(--ease);
+    flex-shrink: 0;
+  }
+
+  .case-link:hover { background: var(--black); color: var(--white); transform: rotate(45deg); }
+
+  .case-image {
+    background: var(--gray-200);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .case-card.featured .case-image {
+    grid-column: 1;
+    grid-row: 1;
+    min-height: 280px;
+  }
+
+  .case-card.featured { grid-template-rows: auto auto; }
+  .case-card.featured .case-content { grid-row: 2; }
+
+  .img-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    color: var(--gray-400);
+    text-transform: uppercase;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .img-label svg { opacity: 0.3; }
+
+  /* Small cards row */
+  .cases-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    margin-top: 2px;
+  }
+
+  .case-card.small {
+    grid-template-columns: 1fr;
+    min-height: 260px;
+  }
+
+  .case-card.small .case-image { min-height: 140px; }
+  .case-card.small .case-content { padding: 2rem; }
+  .case-card.small .case-title { font-size: 1.35rem; }
+
+  /* CONTACT */
+  #contact {
+    border-top: 1px solid var(--gray-200);
+    text-align: center;
+    padding: 8rem 4rem;
+  }
+
+  #contact h2 {
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    margin-bottom: 1rem;
+  }
+
+  #contact p {
+    color: var(--gray-600);
+    font-size: 1.05rem;
+    font-weight: 300;
+    margin-bottom: 3rem;
+    max-width: 40ch;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .contact-links {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .contact-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border: 1px solid var(--gray-200);
+    border-radius: 100px;
+    text-decoration: none;
+    color: var(--gray-600);
+    font-size: 0.875rem;
+    transition: all 0.2s;
+  }
+
+  .contact-link:hover {
+    border-color: var(--black);
+    color: var(--black);
+    background: var(--black);
+    color: var(--white);
+  }
+
+  .contact-email {
+    display: block;
+    margin-bottom: 3rem;
+    font-family: var(--serif);
+    font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+    color: var(--black);
+    text-decoration: none;
+    border-bottom: 1px solid var(--gray-200);
+    padding-bottom: 0.25rem;
+    display: inline-block;
+    transition: border-color 0.2s;
+  }
+
+  .contact-email:hover { border-color: var(--black); }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--gray-200);
+    padding: 2rem 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  footer p {
+    font-size: 0.8rem;
+    color: var(--gray-400);
+  }
+
+  /* ANIMATIONS */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { gap: 1.5rem; }
+    section, .hero { padding-left: 1.5rem; padding-right: 1.5rem; }
+    #about { grid-template-columns: 1fr; gap: 3rem; }
+    .about-photo { aspect-ratio: 4/3; }
+    .skills-grid { grid-template-columns: 1fr; }
+    .case-card { grid-template-columns: 1fr; }
+    .case-image { min-height: 180px; }
+    .cases-row { grid-template-columns: 1fr; }
+    footer { padding: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Valentina Torres</a>
+  <ul class="nav-links">
+    <li><a href="#about">Sobre mí</a></li>
+    <li><a href="#work">Proyectos</a></li>
+    <li><a href="#skills">Habilidades</a></li>
+    <li><a href="#contact">Contacto</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <span class="hero-label">UX Designer · Bogotá, Colombia</span>
+  <h1>Diseño experiencias que <em>importan.</em></h1>
+  <p class="hero-desc">
+    Ayudo a equipos de producto a crear interfaces intuitivas, accesibles y significativas —
+    combinando investigación profunda con diseño centrado en el usuario.
+  </p>
+  <div class="hero-cta">
+    <a href="#work" class="btn-primary">Ver proyectos →</a>
+    <a href="#contact" class="btn-secondary">Trabajemos juntos</a>
+  </div>
+  <span class="hero-scroll">Scroll</span>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-left">
+    <div class="section-label">Sobre mí</div>
+    <h2>5 años haciendo productos más humanos</h2>
+    <div class="about-text">
+      <p>
+        Soy diseñadora UX con experiencia trabajando en startups de etapa temprana y equipos
+        de producto en escala. Me especializo en investigación de usuarios, arquitectura
+        de información y diseño de sistemas — siempre con el objetivo de reducir la fricción
+        y aumentar el impacto.
+      </p>
+      <p>
+        Antes de diseñar, estudié psicología cognitiva, lo que me dio una perspectiva
+        única sobre cómo las personas toman decisiones y procesan información. Ese bagaje
+        guía cada decisión que tomo en el proceso de diseño.
+      </p>
+    </div>
+    <div class="about-stats">
+      <div class="stat">
+        <div class="stat-number">5+</div>
+        <div class="stat-label">Años de experiencia</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">28</div>
+        <div class="stat-label">Proyectos completados</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">12</div>
+        <div class="stat-label">Empresas con las que he trabajado</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">4</div>
+        <div class="stat-label">Países</div>
+      </div>
+    </div>
+  </div>
+  <div class="about-photo reveal">
+    <div class="photo-placeholder">
+      <div class="photo-icon">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="10" cy="7" r="3.5" stroke="#b0b0a8" stroke-width="1.5"/>
+          <path d="M2 17c0-3.314 3.582-6 8-6s8 2.686 8 6" stroke="#b0b0a8" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+      Tu foto aquí
+    </div>
+  </div>
+</section>
+
+<!-- WORK -->
+<section id="work">
+  <div class="work-header">
+    <div>
+      <div class="section-label">Casos de estudio</div>
+      <h2>Proyectos seleccionados</h2>
+    </div>
+  </div>
+
+  <div class="cases-grid">
+
+    <!-- FEATURED -->
+    <div class="case-card featured reveal">
+      <div class="case-image">
+        <div class="img-label">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+            <rect x="4" y="4" width="24" height="24" rx="3" stroke="#b0b0a8" stroke-width="1.5"/>
+            <circle cx="12" cy="13" r="3" stroke="#b0b0a8" stroke-width="1.5"/>
+            <path d="M4 22l7-5 4 4 5-6 8 7" stroke="#b0b0a8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Mockup / Capturas del proyecto
+        </div>
+      </div>
+      <div class="case-content">
+        <div class="case-top">
+          <div class="case-meta">
+            <span class="case-tag">Fintech</span>
+            <span class="case-tag">Mobile</span>
+            <span class="case-year">2024</span>
+          </div>
+          <h3 class="case-title">Rediseño de onboarding para Novu — de 34% a 71% de conversión</h3>
+          <p class="case-desc">
+            Investigué los puntos de abandono en el flujo de registro de una fintech B2C.
+            A través de entrevistas, pruebas de usabilidad y análisis del funnel, rediseñé
+            el proceso de onboarding reduciendo los pasos de 12 a 5 e incrementando la
+            activación en un 109%.
+          </p>
+        </div>
+        <div class="case-bottom">
+          <div class="case-metrics">
+            <div class="metric">
+              <span class="metric-value">+109%</span>
+              <span class="metric-label">Conversión</span>
+            </div>
+            <div class="metric">
+              <span class="metric-value">−60%</span>
+              <span class="metric-label">Abandono</span>
+            </div>
+            <div class="metric">
+              <span class="metric-value">12→5</span>
+              <span class="metric-label">Pasos</span>
+            </div>
+          </div>
+          <a href="#" class="case-link">→</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ROW 2 -->
+    <div class="cases-row">
+      <div class="case-card small reveal">
+        <div class="case-image">
+          <div class="img-label">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+              <rect x="3" y="3" width="22" height="22" rx="3" stroke="#b0b0a8" stroke-width="1.5"/>
+              <path d="M8 14h12M8 9h12M8 19h7" stroke="#b0b0a8" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            Mockup del proyecto
+          </div>
+        </div>
+        <div class="case-content">
+          <div class="case-top">
+            <div class="case-meta">
+              <span class="case-tag">SaaS</span>
+              <span class="case-year">2023</span>
+            </div>
+            <h3 class="case-title">Dashboard de analítica para equipos de ventas B2B</h3>
+            <p class="case-desc">Sistema de diseño + componentes reutilizables para una plataforma de CRM.</p>
+          </div>
+          <div class="case-bottom">
+            <a href="#" class="case-link">→</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="case-card small reveal">
+        <div class="case-image">
+          <div class="img-label">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+              <rect x="8" y="2" width="12" height="24" rx="3" stroke="#b0b0a8" stroke-width="1.5"/>
+              <circle cx="14" cy="21" r="1.5" stroke="#b0b0a8" stroke-width="1.2"/>
+            </svg>
+            Mockup mobile
+          </div>
+        </div>
+        <div class="case-content">
+          <div class="case-top">
+            <div class="case-meta">
+              <span class="case-tag">Healthtech</span>
+              <span class="case-year">2023</span>
+            </div>
+            <h3 class="case-title">App de seguimiento de salud mental para adolescentes</h3>
+            <p class="case-desc">Investigación con usuarios vulnerables, diseño accesible y validación clínica.</p>
+          </div>
+          <div class="case-bottom">
+            <a href="#" class="case-link">→</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="case-card small reveal">
+        <div class="case-image">
+          <div class="img-label">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+              <rect x="2" y="6" width="24" height="16" rx="2" stroke="#b0b0a8" stroke-width="1.5"/>
+              <path d="M7 26h14" stroke="#b0b0a8" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M14 22v4" stroke="#b0b0a8" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            Desktop + Web
+          </div>
+        </div>
+        <div class="case-content">
+          <div class="case-top">
+            <div class="case-meta">
+              <span class="case-tag">E-commerce</span>
+              <span class="case-year">2022</span>
+            </div>
+            <h3 class="case-title">Rediseño completo de checkout para tienda de moda sostenible</h3>
+            <p class="case-desc">Auditoría UX, pruebas A/B y rediseño que aumentó el ARPU en un 23%.</p>
+          </div>
+          <div class="case-bottom">
+            <a href="#" class="case-link">→</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="case-card small reveal">
+        <div class="case-image">
+          <div class="img-label">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+              <circle cx="14" cy="14" r="11" stroke="#b0b0a8" stroke-width="1.5"/>
+              <path d="M14 8v6l4 2" stroke="#b0b0a8" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            Prototipo
+          </div>
+        </div>
+        <div class="case-content">
+          <div class="case-top">
+            <div class="case-meta">
+              <span class="case-tag">EdTech</span>
+              <span class="case-year">2022</span>
+            </div>
+            <h3 class="case-title">Plataforma de aprendizaje adaptativo para universidades</h3>
+            <p class="case-desc">Investigación con docentes y estudiantes, mapas de servicio y prototipado.</p>
+          </div>
+          <div class="case-bottom">
+            <a href="#" class="case-link">→</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label">Habilidades</div>
+  <h2>Qué traigo a cada proyecto</h2>
+
+  <div class="skills-grid">
+    <div class="skill-card">
+      <div class="skill-category">Research</div>
+      <h3>Entender antes de diseñar</h3>
+      <ul class="skill-list">
+        <li>Entrevistas de usuario y guerrilla testing</li>
+        <li>Análisis de tareas y journey mapping</li>
+        <li>Análisis cuantitativo de datos</li>
+        <li>Benchmarking competitivo</li>
+        <li>Card sorting y tree testing</li>
+      </ul>
+    </div>
+    <div class="skill-card">
+      <div class="skill-category">Design</div>
+      <h3>Diseño de producto e interacción</h3>
+      <ul class="skill-list">
+        <li>Wireframing y prototipado rápido</li>
+        <li>Diseño de sistemas (Design Systems)</li>
+        <li>Diseño responsive y mobile-first</li>
+        <li>Accesibilidad (WCAG 2.1 AA)</li>
+        <li>Microinteracciones y motion design</li>
+      </ul>
+    </div>
+    <div class="skill-card">
+      <div class="skill-category">Strategy</div>
+      <h3>Producto y colaboración</h3>
+      <ul class="skill-list">
+        <li>Facilitación de workshops y sprints</li>
+        <li>Métricas de producto (HEART, NPS)</li>
+        <li>Trabajo con equipos ágiles (Scrum)</li>
+        <li>Comunicación con stakeholders</li>
+        <li>Handoff y documentación para devs</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="tools-row">
+    <span class="tool-tag">Figma</span>
+    <span class="tool-tag">Figjam</span>
+    <span class="tool-tag">Maze</span>
+    <span class="tool-tag">Hotjar</span>
+    <span class="tool-tag">Notion</span>
+    <span class="tool-tag">Miro</span>
+    <span class="tool-tag">Loom</span>
+    <span class="tool-tag">Dovetail</span>
+    <span class="tool-tag">Zeplin</span>
+    <span class="tool-tag">Jira</span>
+    <span class="tool-tag">Storybook</span>
+    <span class="tool-tag">Framer</span>
+    <span class="tool-tag">Amplitude</span>
+    <span class="tool-tag">Optimal Workshop</span>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label" style="justify-content: center;">Contacto</div>
+  <h2>¿Tienes un proyecto en mente?</h2>
+  <p>Estoy abierta a oportunidades de producto, consultoría y proyectos freelance. Hablemos.</p>
+  <a href="mailto:hola@valentinatorres.co" class="contact-email">hola@valentinatorres.co</a>
+  <div class="contact-links">
+    <a href="https://linkedin.com" class="contact-link" target="_blank">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+      LinkedIn
+    </a>
+    <a href="https://dribbble.com" class="contact-link" target="_blank">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85m19.5 1.9c-3.5-.93-6.63-.82-8.94 0-2.58.92-5.01 2.86-7.44 6.32"/></svg>
+      Dribbble
+    </a>
+    <a href="https://behance.net" class="contact-link" target="_blank">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M22 7h-7V5h7v2zm1.726 10c-.442 1.297-2.029 3-5.101 3-3.074 0-5.564-1.729-5.564-5.675 0-3.91 2.325-5.92 5.466-5.92 3.082 0 4.964 1.782 5.375 4.426.078.506.109 1.188.095 2.14H15.97c.13 3.211 3.483 3.312 4.588 2.029H23.7zm-7.shutterstock.com-2.626c-.636-.353-1.429-.556-2.335-.509-.867.045-1.557.332-2.04.81-.34.337-.546.752-.595 1.151h5.177c-.088-.611-.435-1.138-1.207-1.452z"/></svg>
+      Behance
+    </a>
+    <a href="#" class="contact-link">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10,9 9,9 8,9"/></svg>
+      Descargar CV
+    </a>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 Valentina Torres · Diseñado con intención</p>
+  <p>Bogotá, Colombia 🇨🇴</p>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
